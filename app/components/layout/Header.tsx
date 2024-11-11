@@ -4,6 +4,7 @@ import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FiCode, FiLogOut, FiUser } from "react-icons/fi";
+import FullScreenButton from '../ui/FullScreenButton';
 
 export default function Header() {
   const { data: session } = useSession();
@@ -31,6 +32,7 @@ export default function Header() {
                 <FiUser className="w-4 h-4 text-gray-400" />
                 <span className="text-gray-300">{session.user.name}</span>
               </div>
+              <FullScreenButton /> 
               <button
                 onClick={handleSignOut}
                 className="flex items-center space-x-2 rounded-lg px-4 py-2 
@@ -42,14 +44,17 @@ export default function Header() {
               </button>
             </div>
           ) : (
-            <Link
-              href="/login"
-              className="flex items-center space-x-2 text-gray-300 
-                       hover:text-blue-400 transition-colors"
-            >
-              <FiUser className="w-4 h-4" />
-              <span>Sign In</span>
-            </Link>
+            <div className="flex items-center gap-4">
+              <FullScreenButton /> 
+              <Link
+                href="/login"
+                className="flex items-center space-x-2 text-gray-300 
+                         hover:text-blue-400 transition-colors"
+              >
+                <FiUser className="w-4 h-4" />
+                <span>Sign In</span>
+              </Link>
+            </div>
           )}
         </div>
       </nav>
